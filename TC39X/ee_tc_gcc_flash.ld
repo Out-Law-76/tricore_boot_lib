@@ -255,6 +255,9 @@ MEMORY
 
   EDMEM           (w!xp): org = 0x99000000, len = 4M
   EDMEM_nc        (w!xp): org = 0xB9000000, len = 4M
+
+/* OLDA address range */
+  OLDA_nc         (w!xp): org = 0xAFE00000, len = 0x7FFFF
 }
 
 /* Map local memory address to a global address */
@@ -681,6 +684,12 @@ SECTIONS
     *(.lmubss)
     *(.lmubss.*)
   } > LMU_SRAM_nc
+
+/* OLDA section */
+  CORE_SEC(.OLDA_BASE_MEM) (NOLOAD) :
+  {
+    *(.OLDA_BASE_MEM)
+  } > OLDA_nc
 }
 
 /* Core Private Sections */
